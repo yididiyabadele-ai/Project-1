@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="./style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pen</title>
+  </head>
+  <body>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
+`html
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TipTap Cafe | Artisanal Sweets & Gourmet Bites in Jijiga</title>
+    
+    <!-- Google Fonts: Light, elegant, and adorable typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600&family=Outfit:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'],
+                        cute: ['Fredoka', 'cursive'],
+                    },
+                    colors: {
+                        pinkish: {
+                            50: '#FFF5F8',
+                            100: '#FCE7F0',
+                            200: '#FBCFE0',
+                            300: '#F8A5C2',
+                            400: '#F472B6',
+                            500: '#EC4899',
+                            600: '#DB2777',
+                            900: '#831843',
+                        },
+                        cream: '#FFFDF9',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #FFF5F8;
+            font-weight: 300; /* Decreased font boldness across the entire site */
+            color: #4A3B43;
+            overflow-x: hidden;
+        }
+
+        /* Adorable Soft Glassmorphism */
+        .pink-glass {
+            background: rgba(255, 245, 248, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(252, 231, 240, 0.6);
+        }
+
+        .pink-card {
+            background: #ffffff;
+            border: 1px solid rgba(251, 207, 224, 0.5);
+            box-shadow: 0 10px 30px -10px rgba(236, 72, 153, 0.12);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .pink-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px -12px rgba(236, 72, 153, 0.22);
+        }
+
+        /* Vertical Typography for Hero Ice Cream */
+        .vertical-text {
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            transform: rotate(180deg);
+        }
+
+        /* Cute Floating Animation */
+        @keyframes gentle-bounce {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-8px) rotate(1deg); }
+        }
+        .animate-cute-float {
+            animation: gentle-bounce 5s ease-in-out infinite;
+        }
+
+        /* Hide scrollbars for crisp tab controls */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        /* Page Tab Active Indicator */
+        .page-tab.active {
+            background-color: #EC4899;
+            color: #ffffff;
+            box-shadow: 0 4px 14px rgba(236, 72, 153, 0.35);
+        }
+
+        .menu-filter.active {
+            background-color: #EC4899;
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body class="selection:bg-pinkish-300 selection:text-white font-sans">
+
+<!-- Navigation Header -->
+    <header class="fixed top-0 left-0 w-full z-50 pink-glass transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            
+            <!-- Brand Logo -->
+            <div class="flex items-center gap-3 cursor-pointer" onclick="switchPage('home')">
+                <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-pinkish-400 to-pinkish-300 flex items-center justify-center text-white shadow-md text-lg">
+                    <i class="fa-solid fa-ice-cream"></i>
+                </div>
+                <div>
+                    <span class="font-cute text-2xl font-normal text-pinkish-900 tracking-wide">TipTap <span class="text-pinkish-500">Cafe</span></span>
+                    <span class="block text-[10px] text-pinkish-400 tracking-wider uppercase font-medium -mt-1">Jijiga • Ethiopia</span>
+                </div>
+            </div>
+
+            <!-- 3-Page Navigation Tabs -->
+            <nav class="hidden md:flex items-center bg-white/80 p-1.5 rounded-full border border-pinkish-200 shadow-sm gap-1">
+                <button onclick="switchPage('home')" id="tab-home" class="page-tab active px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 flex items-center gap-2">
+                    <i class="fa-solid fa-house-heart text-xs"></i> Home
+                </button>
+                <button onclick="switchPage('menu')" id="tab-menu" class="page-tab text-pinkish-900 hover:text-pinkish-600 px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 flex items-center gap-2">
+                    <i class="fa-solid fa-utensils text-xs"></i> Full Menu
+                </button>
+                <button onclick="switchPage('visit')" id="tab-visit" class="page-tab text-pinkish-900 hover:text-pinkish-600 px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 flex items-center gap-2">
+                    <i class="fa-solid fa-location-dot text-xs"></i> Visit Us
+                </button>
+            </nav>
+
+            <!-- Direct Phone Action -->
+            <div class="hidden sm:flex items-center gap-3">
+                <a href="tel:+251912345678" class="bg-pinkish-500 hover:bg-pinkish-600 text-white px-5 py-2.5 rounded-full text-sm font-medium transition-all shadow-md hover:shadow-pinkish-300/50 flex items-center gap-2">
+                    <i class="fa-solid fa-phone"></i> +251 91 234 5678
+                </a>
+            </div>
+
+            <!-- Mobile Hamburger Button -->
+            <button id="mobile-toggle" class="md:hidden text-pinkish-600 p-2 text-xl focus:outline-none">
+                <i class="fa-solid fa-bars-staggered"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Drawer Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white/95 border-b border-pinkish-200 px-6 py-4 shadow-xl">
+            <div class="flex flex-col gap-3">
+                <button onclick="switchPage('home'); closeMobileMenu()" class="text-left py-2.5 px-4 rounded-xl font-medium text-pinkish-900 hover:bg-pinkish-50 flex items-center gap-3">
+                    <i class="fa-solid fa-house-heart text-pinkish-400"></i> Home Page
+                </button>
+                <button onclick="switchPage('menu'); closeMobileMenu()" class="text-left py-2.5 px-4 rounded-xl font-medium text-pinkish-900 hover:bg-pinkish-50 flex items-center gap-3">
+                    <i class="fa-solid fa-utensils text-pinkish-400"></i> Full Menu & Flavors
+                </button>
+                <button onclick="switchPage('visit'); closeMobileMenu()" class="text-left py-2.5 px-4 rounded-xl font-medium text-pinkish-900 hover:bg-pinkish-50 flex items-center gap-3">
+                    <i class="fa-solid fa-location-dot text-pinkish-400"></i> Location & Hours
+
+</button>
+                <a href="tel:+251912345678" class="mt-2 text-center bg-pinkish-500 text-white py-3 rounded-xl font-medium flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-phone"></i> Call +251 91 234 5678
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="pt-24 pb-16 min-h-screen">
+
+        <!-- ================================================================= -->
+        <!-- PAGE 1: HOME PAGE -->
+        <!-- ================================================================= -->
+        <div id="page-home" class="page-content space-y-16">
+
+            <!-- SECTION 1: HERO SECTION -->
+            <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
+                <div class="bg-gradient-to-br from-gray-950 via-gray-900 to-black rounded-3xl p-6 sm:p-10 md:p-12 text-white shadow-2xl relative overflow-hidden">
+                    
+                    <!-- Soft pink decorative glow -->
+                    <div class="absolute -top-24 -right-24 w-96 h-96 bg-pinkish-500/20 rounded-full blur-3xl pointer-events-none"></div>
+                    <div class="absolute -bottom-24 -left-24 w-80 h-80 bg-pinkish-400/10 rounded-full blur-3xl pointer-events-none"></div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
+                        
+                        <!-- Left Info Panel: Clean Hero Copy -->
+                        <div class="lg:col-span-6 space-y-6">
+                            
+                            <!-- Location Badge -->
+                            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-pinkish-500/20 border border-pinkish-400/30 text-pinkish-300 text-xs font-medium tracking-wide">
+                                <i class="fa-solid fa-location-dot text-pinkish-400"></i> Jijiga, Somali Region, Ethiopia
+                            </div>
+
+                            <h1 class="font-cute text-4xl sm:text-5xl lg:text-6xl font-normal tracking-wide text-white leading-tight">
+                                Welcome to <br>
+                                <span class="text-transparent bg-clip-text bg-gradient-to-r from-pinkish-300 via-pinkish-400 to-pinkish-200">TipTap Cafe</span>
+                            </h1>
+
+                            <p class="text-gray-300 font-light text-base sm:text-lg max-w-lg leading-relaxed">
+                                Handcrafted artisanal ice creams, wood-fired pizzas, sizzling crispy chicken, and cozy cafe moments in the heart of Jijiga.
+                            </p>
+
+                            <!-- Hero Phone & Direct Details -->
+                            <div class="bg-white/10 backdrop-blur-md p-4 rounded-2xl border border-white/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 max-w-md">
+                                <div class="space-y-0.5">
+                                    <span class="text-xs text-pinkish-300 uppercase tracking-wider font-medium">Direct Line</span>
+                                    <p class="font-mono text-lg text-white font-normal">+251 91 234 5678</p>
+                                </div>
+                                <a href="tel:+251912345678" class="w-full sm:w-auto text-center bg-pinkish-500 hover:bg-pinkish-600 text-white px-5 py-2.5 rounded-xl text-sm font-medium transition-all shadow-lg shadow-pinkish-500/30">
+                                    <i class="fa-solid fa-phone mr-1.5"></i> Call Now
+                                </a>
+                            </div>
+
+                            <div class="flex items-center gap-4 pt-2">
+                                <button onclick="switchPage('menu')" class="bg-white text-gray-900 hover:bg-pinkish-100 px-6 py-3 rounded-full text-sm font-medium transition-all flex items-center gap-2">
+
+Explore Full Menu <i class="fa-solid fa-arrow-right text-pinkish-500 text-xs"></i>
+                                </button>
+                                <button onclick="switchPage('visit')" class="text-pinkish-200 hover:text-white px-4 py-3 text-sm font-medium transition-colors">
+                                    View Hours & Location
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Right Showcase: Vertical Black Image + Bold "TIP TAP" Side Title -->
+                        <div class="lg:col-span-6 flex items-center justify-center pt-6 lg:pt-0">
+                            <div class="relative bg-black p-4 sm:p-6 rounded-3xl border border-gray-800 shadow-2xl flex items-center gap-4 sm:gap-6 max-w-md w-full animate-cute-float">
+                                
+                                <!-- Vertical Bold Side Typography "TIP TAP" -->
+                                <div class="flex items-center justify-center border-r border-pinkish-500/30 pr-3 sm:pr-4">
+                                    <span class="vertical-text font-cute text-4xl sm:text-5xl font-normal text-transparent bg-clip-text bg-gradient-to-t from-pinkish-500 via-pinkish-300 to-white tracking-widest uppercase">
+                                        TIP TAP
+                                    </span>
+                                </div>
+
+                                <!-- Vertical Ice Cream Cone (3738.jpg) with fallback -->
+                                <div class="relative flex-1 h-[360px] sm:h-[420px] rounded-2xl overflow-hidden border border-gray-800 group">
+                                    <img src="3738.jpg" 
+                                         onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&q=80&w=800';" 
+                                         alt="TipTap Signature Ice Cream Cone" 
+                                         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+                                    <div class="absolute bottom-3 left-3 right-3 text-center bg-black/60 backdrop-blur-md p-2 rounded-xl border border-white/10">
+                                        <p class="font-cute text-sm text-pinkish-200">Signature Chocolate Fudge Cone</p>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 2: BRAND STORY & CAFÉ VIBE -->
+            <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                    
+                    <!-- Story Cards Visual Grid (3741.jpg & 3742.jpg) -->
+                    <div class="lg:col-span-6 grid grid-cols-2 gap-4">
+                        <div class="pink-card p-3 rounded-3xl">
+                            <img src="3741.jpg" 
+                                 onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1562376552-0d160a2f238d?auto=format&fit=crop&q=80&w=800';" 
+                                 alt="Iced Lattes & Waffle Dessert" 
+                                 class="w-full h-56 sm:h-64 object-cover rounded-2xl mb-3">
+                            <div class="p-2 text-center">
+                                <span class="text-xs text-pinkish-500 font-medium tracking-wide uppercase">Handcrafted</span>
+                                <h4 class="font-cute text-base font-normal text-pinkish-900">Coffee & Waffles</h4>
+                            </div>
+                        </div>
+
+<div class="pink-card p-3 rounded-3xl mt-6">
+                            <img src="3742.jpg" 
+                                 onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&q=80&w=800';" 
+                                 alt="Gourmet Platter Featured Shot" 
+                                 class="w-full h-56 sm:h-64 object-cover rounded-2xl mb-3">
+                            <div class="p-2 text-center">
+                                <span class="text-xs text-pinkish-500 font-medium tracking-wide uppercase">Fresh Daily</span>
+                                <h4 class="font-cute text-base font-normal text-pinkish-900">Instagram Delights</h4>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Story Text -->
+                    <div class="lg:col-span-6 space-y-6 pl-0 lg:pl-6">
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-pinkish-100 text-pinkish-600 text-xs font-medium">
+                            <i class="fa-solid fa-heart text-pinkish-400"></i> Our Passion & Atmosphere
+                        </div>
+                        
+                        <h2 class="font-cute text-3xl sm:text-4xl font-normal text-pinkish-900 leading-snug">
+                            Sweet Moments & Sizzling Delights in Jijiga
+                        </h2>
+
+                        <p class="text-gray-600 font-light text-base leading-relaxed">
+                            At TipTap Cafe, we crafted a cozy, adorable space where friends and families meet to share unforgettable flavors. From silky smooth scoops of fresh gelato to our golden crispy chicken and artisanal wood-fired pizzas, every dish is made with love and served with a bright smile.
+                        </p>
+
+                        <div class="grid grid-cols-3 gap-4 pt-2">
+                            <div class="bg-white p-4 rounded-2xl border border-pinkish-100 text-center shadow-sm">
+                                <i class="fa-solid fa-ice-cream text-2xl text-pinkish-400 mb-2"></i>
+                                <h5 class="font-cute text-sm font-normal text-pinkish-900">100% Fresh</h5>
+                                <p class="text-xs text-gray-500 font-light">Gelato Sweets</p>
+                            </div>
+                            <div class="bg-white p-4 rounded-2xl border border-pinkish-100 text-center shadow-sm">
+                                <i class="fa-solid fa-fire text-2xl text-pinkish-400 mb-2"></i>
+                                <h5 class="font-cute text-sm font-normal text-pinkish-900">Sizzling</h5>
+                                <p class="text-xs text-gray-500 font-light">Gourmet Bites</p>
+                            </div>
+                            <div class="bg-white p-4 rounded-2xl border border-pinkish-100 text-center shadow-sm">
+                                <i class="fa-solid fa-mug-hot text-2xl text-pinkish-400 mb-2"></i>
+                                <h5 class="font-cute text-sm font-normal text-pinkish-900">Cozy Vibe</h5>
+                                <p class="text-xs text-gray-500 font-light">Hangout Spot</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+        </div>
+
+        <!-- ================================================================= -->
+        <!-- PAGE 2: FULL MENU PAGE -->
+        <!-- ================================================================= -->
+        <div id="page-menu" class="page-content hidden space-y-16">
+
+            <!-- Category Filter Header -->
+            <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4">
+
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-pinkish-100 text-pinkish-600 text-xs font-medium">
+                    <i class="fa-solid fa-utensils"></i> Freshly Prepared Daily
+                </div>
+                <h2 class="font-cute text-4xl font-normal text-pinkish-900">TipTap Menu Experience</h2>
+                <p class="text-gray-600 font-light text-base max-w-xl mx-auto">
+                    Browse our selection of handcrafted ice creams, signature pizzas, juicy burgers, and crispy fried chicken.
+                </p>
+
+                <!-- Filter Pills -->
+                <div class="flex items-center justify-center gap-2 flex-wrap pt-4">
+                    <button onclick="filterMenu(event, 'all')" class="menu-filter active px-5 py-2 rounded-full text-sm font-medium border border-pinkish-200 transition-all">All Items</button>
+                    <button onclick="filterMenu(event, 'icecream')" class="menu-filter px-5 py-2 rounded-full text-sm font-medium border border-pinkish-200 text-pinkish-900 hover:border-pinkish-400 transition-all">Ice Cream & Gelato</button>
+                    <button onclick="filterMenu(event, 'pizza')" class="menu-filter px-5 py-2 rounded-full text-sm font-medium border border-pinkish-200 text-pinkish-900 hover:border-pinkish-400 transition-all">Pizzas & Burgers</button>
+                    <button onclick="filterMenu(event, 'chicken')" class="menu-filter px-5 py-2 rounded-full text-sm font-medium border border-pinkish-200 text-pinkish-900 hover:border-pinkish-400 transition-all">Crispy Chicken & Platters</button>
+                </div>
+            </section>
+
+            <!-- SECTION 3: SIGNATURE ICE CREAM & GELATO -->
+            <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+                <div class="flex items-center justify-between border-b border-pinkish-200 pb-4">
+                    <div>
+                        <h3 class="font-cute text-2xl font-normal text-pinkish-900">Signature Gelato Display</h3>
+                        <p class="text-xs text-gray-500 font-light">Fresh scoops, waffles, and sorbets</p>
+                    </div>
+                    <span class="text-xs bg-pinkish-100 text-pinkish-600 px-3 py-1 rounded-full font-medium">Fresh Daily</span>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                    <!-- Gelato Display Freezer Showcase (3753.jpg) -->
+                    <div class="lg:col-span-5 pink-card p-4 rounded-3xl">
+                        <div class="relative rounded-2xl overflow-hidden h-[340px]">
+                            <img src="3753.jpg" 
+                                 onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1580915411954-282cb1b0d780?auto=format&fit=crop&q=80&w=800';" 
+                                 alt="Fresh Gelato Counter at TipTap Cafe" 
+                                 class="w-full h-full object-cover">
+                            <div class="absolute bottom-3 left-3 right-3 bg-white/90 backdrop-blur-md p-3 rounded-xl border border-pinkish-100 shadow-md">
+                                <div class="flex items-center justify-between">
+                                    <span class="font-cute text-pinkish-900 text-sm">Customer Favorite Gelato Bar</span>
+                                    <span class="text-amber-500 text-xs font-bold"><i class="fa-solid fa-star"></i> 5.0</span>
+                                </div>
+                                <p class="text-[11px] text-gray-600 font-light mt-0.5">Watermelon, Pretzel Caramel, Pistachio, Dark Fudge & Tropical Mango</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Gelato Item Cards -->
+
+<div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="menu-card pink-card p-4 rounded-2xl space-y-3" data-category="icecream">
+                            <div class="h-36 rounded-xl overflow-hidden">
+                                <img src="3738.jpg" 
+                                     onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1570197788417-0e82375c9371?auto=format&fit=crop&q=80&w=800';" 
+                                     alt="Chocolate Fudge Cone" 
+                                     class="w-full h-full object-cover">
+                            </div>
+                            <div class="flex justify-between items-start">
+                                <h4 class="font-cute text-lg font-normal text-pinkish-900">Chocolate Fudge Cone</h4>
+                                <span class="text-xs font-medium bg-pinkish-100 text-pinkish-600 px-2.5 py-1 rounded-full">Scoop</span>
+                            </div>
+                            <p class="text-xs text-gray-500 font-light">Rich chocolate gelato drizzled with homemade fudge on a crisp waffle cone.</p>
+                        </div>
+
+                        <div class="menu-card pink-card p-4 rounded-2xl space-y-3" data-category="icecream">
+                            <div class="h-36 rounded-xl overflow-hidden">
+                                <img src="3741.jpg" 
+                                     onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1562376552-0d160a2f238d?auto=format&fit=crop&q=80&w=800';" 
+                                     alt="Iced Coffee and Waffles" 
+                                     class="w-full h-full object-cover">
+                            </div>
+                            <div class="flex justify-between items-start">
+                                <h4 class="font-cute text-lg font-normal text-pinkish-900">Coffee & Waffle Deluxe</h4>
+                                <span class="text-xs font-medium bg-pinkish-100 text-pinkish-600 px-2.5 py-1 rounded-full">Combo</span>
+                            </div>
+                            <p class="text-xs text-gray-500 font-light">Warm Belgian waffle topped with vanilla gelato and chilled iced latte.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 4: GOURMET SAVORY & SIZZLING BITES -->
+            <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+                <div class="flex items-center justify-between border-b border-pinkish-200 pb-4">
+                    <div>
+                        <h3 class="font-cute text-2xl font-normal text-pinkish-900">Sizzling & Savory Favorites</h3>
+                        <p class="text-xs text-gray-500 font-light">Pizzas, exploding burgers, crispy chicken & platters</p>
+                    </div>
+                    <span class="text-xs bg-pinkish-100 text-pinkish-600 px-3 py-1 rounded-full font-medium">Made to Order</span>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    
+                    <!-- Item 1: Exploding Burger (3743.jpg) -->
+                    <div class="menu-card pink-card p-4 rounded-3xl space-y-3" data-category="pizza">
+                        <div class="h-52 rounded-2xl overflow-hidden relative">
+                            <img src="3743.jpg" 
+                                 onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&q=80&w=800';" 
+                                 alt="TipTap Exploding Bacon Double Burger" 
+                                 class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+
+</div>
+                        <div class="space-y-1">
+                            <h4 class="font-cute text-xl font-normal text-pinkish-900">Exploding Tower Burger</h4>
+                            <p class="text-xs text-gray-500 font-light">Double beef patty, melted cheddar, crispy bacon, pickles, and house sauce.</p>
+                        </div>
+                    </div>
+
+                    <!-- Item 2: Wood-Fired Pizza (3750.jpg) -->
+                    <div class="menu-card pink-card p-4 rounded-3xl space-y-3" data-category="pizza">
+                        <div class="h-52 rounded-2xl overflow-hidden relative">
+                            <img src="3750.jpg" 
+                                 onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&q=80&w=800';" 
+                                 alt="Artisanal Pizza on Wooden Paddle" 
+                                 class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                        </div>
+                        <div class="space-y-1">
+                            <h4 class="font-cute text-xl font-normal text-pinkish-900">Wood-Fired Specialty Pizza</h4>
+                            <p class="text-xs text-gray-500 font-light">Hand-tossed dough with rich tomato sauce, fresh mozzarella, and herbs.</p>
+                        </div>
+                    </div>
+
+                    <!-- Item 3: Flying Spicy Fried Chicken (3748.jpg) -->
+                    <div class="menu-card pink-card p-4 rounded-3xl space-y-3" data-category="chicken">
+                        <div class="h-52 rounded-2xl overflow-hidden relative">
+                            <img src="3748.jpg" 
+                                 onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1626645738196-c2a7c87a8f58?auto=format&fit=crop&q=80&w=800';" 
+                                 alt="Flying Hot Spicy Fried Chicken" 
+                                 class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                        </div>
+                        <div class="space-y-1">
+                            <h4 class="font-cute text-xl font-normal text-pinkish-900">Sizzling Spicy Drumsticks</h4>
+                            <p class="text-xs text-gray-500 font-light">Ultra crispy spiced fried chicken drumsticks tossed with red chili flakes.</p>
+                        </div>
+                    </div>
+
+                    <!-- Item 4: Meat & Fries Platter (3747.jpg) -->
+                    <div class="menu-card pink-card p-4 rounded-3xl space-y-3" data-category="chicken">
+                        <div class="h-52 rounded-2xl overflow-hidden relative">
+                            <img src="3747.jpg" 
+                                 onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&q=80&w=800';" 
+                                 alt="Gourmet Meat and Fries Feast Platter" 
+                                 class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                        </div>
+                        <div class="space-y-1">
+                            <h4 class="font-cute text-xl font-normal text-pinkish-900">Gourmet Feast Platter</h4>
+                            <p class="text-xs text-gray-500 font-light">Grilled skewers, crispy fries, steak cuts, rice, and dipping sauces.</p>
+                        </div>
+                    </div>
+
+                    <!-- Item 5: Crispy Chicken Wraps (3746.jpg) -->
+                    <div class="menu-card pink-card p-4 rounded-3xl space-y-3" data-category="chicken">
+                        <div class="h-52 rounded-2xl overflow-hidden relative">
+
+<img src="3746.jpg" 
+                                 onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1626700051175-6818013e1d4f?auto=format&fit=crop&q=80&w=800';" 
+                                 alt="Crispy Cheesy Chicken Wraps" 
+                                 class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                        </div>
+                        <div class="space-y-1">
+                            <h4 class="font-cute text-xl font-normal text-pinkish-900">Cheesy Chicken Wraps</h4>
+                            <p class="text-xs text-gray-500 font-light">Toasted tortilla wraps loaded with seasoned chicken, melted cheese, and fresh greens.</p>
+                        </div>
+                    </div>
+
+                    <!-- Item 6: Crispy Tenders Platter (3745.jpg) -->
+                    <div class="menu-card pink-card p-4 rounded-3xl space-y-3" data-category="chicken">
+                        <div class="h-52 rounded-2xl overflow-hidden relative">
+                            <img src="3745.jpg" 
+                                 onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1562967914-608f82629710?auto=format&fit=crop&q=80&w=800';" 
+                                 alt="Crispy Chicken Tenders and Golden Fries" 
+                                 class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                        </div>
+                        <div class="space-y-1">
+                            <h4 class="font-cute text-xl font-normal text-pinkish-900">Golden Tenders & Fries</h4>
+                            <p class="text-xs text-gray-500 font-light">Golden crispy chicken strips served with french fries and signature dip duo.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+        </div>
+
+        <!-- ================================================================= -->
+        <!-- PAGE 3: VISIT US & GALLERY -->
+        <!-- ================================================================= -->
+        <div id="page-visit" class="page-content hidden space-y-16">
+
+            <!-- SECTION 5: PHOTO GALLERY & ATMOSPHERE -->
+            <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+                <div class="text-center space-y-3">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-pinkish-100 text-pinkish-600 text-xs font-medium">
+                        <i class="fa-solid fa-camera-retro"></i> Social Spotlight
+                    </div>
+                    <h2 class="font-cute text-4xl font-normal text-pinkish-900">Atmosphere & Moments</h2>
+                    <p class="text-gray-600 font-light text-base max-w-lg mx-auto">Take a glimpse inside TipTap Cafe. Where food looks as amazing as it tastes.</p>
+                </div>
+
+                <!-- Gallery Masonry Grid -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="pink-card p-2 rounded-2xl h-60 overflow-hidden">
+                        <img src="3742.jpg" 
+                             onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&q=80&w=800';" 
+                             alt="TipTap Food Shot" 
+                             class="w-full h-full object-cover rounded-xl hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="pink-card p-2 rounded-2xl h-60 overflow-hidden">
+                        <img src="3753.jpg" 
+                             onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1580915411954-282cb1b0d780?auto=format&fit=crop&q=80&w=800';"
+
+alt="Gelato Counter" 
+                             class="w-full h-full object-cover rounded-xl hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="pink-card p-2 rounded-2xl h-60 overflow-hidden">
+                        <img src="3748.jpg" 
+                             onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1626645738196-c2a7c87a8f58?auto=format&fit=crop&q=80&w=800';" 
+                             alt="Flying Hot Chicken" 
+                             class="w-full h-full object-cover rounded-xl hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="pink-card p-2 rounded-2xl h-60 overflow-hidden">
+                        <img src="3741.jpg" 
+                             onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1562376552-0d160a2f238d?auto=format&fit=crop&q=80&w=800';" 
+                             alt="Iced Coffee Waffles" 
+                             class="w-full h-full object-cover rounded-xl hover:scale-105 transition-transform duration-500">
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 6: LOCATION, HOURS & CONTACT DETAILS -->
+            <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="bg-white rounded-3xl p-8 lg:p-12 border border-pinkish-200 shadow-xl space-y-8">
+                    
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                        
+                        <!-- Contact Information Panel -->
+                        <div class="lg:col-span-7 space-y-6">
+                            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-pinkish-100 text-pinkish-600 text-xs font-medium">
+                                <i class="fa-solid fa-map-pin"></i> Visit Us In Person
+                            </div>
+
+                            <h3 class="font-cute text-3xl font-normal text-pinkish-900">
+                                Location & Opening Hours
+                            </h3>
+
+                            <div class="space-y-4 text-gray-600 font-light text-base">
+                                <div class="flex items-start gap-4">
+                                    <div class="w-10 h-10 rounded-2xl bg-pinkish-100 text-pinkish-600 flex items-center justify-center text-lg shrink-0 mt-1">
+                                        <i class="fa-solid fa-location-dot"></i>
+                                    </div>
+                                    <div>
+                                        <h5 class="font-cute text-pinkish-900 font-normal text-lg">Address</h5>
+                                        <p>TipTap Cafe, Main Avenue, Jijiga</p>
+                                        <p class="text-xs text-gray-500">Somali Region, Ethiopia</p>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-start gap-4">
+                                    <div class="w-10 h-10 rounded-2xl bg-pinkish-100 text-pinkish-600 flex items-center justify-center text-lg shrink-0 mt-1">
+                                        <i class="fa-solid fa-phone"></i>
+                                    </div>
+                                    <div>
+                                        <h5 class="font-cute text-pinkish-900 font-normal text-lg">Phone Number</h5>
+                                        <p class="font-mono text-gray-800 font-normal">+251 91 234 5678</p>
+                                        <p class="text-xs text-gray-500">Call us for table reservations & inquiries</p>
+                                    </div>
+                                </div>
+
+<div class="flex items-start gap-4">
+                                    <div class="w-10 h-10 rounded-2xl bg-pinkish-100 text-pinkish-600 flex items-center justify-center text-lg shrink-0 mt-1">
+                                        <i class="fa-solid fa-clock"></i>
+                                    </div>
+                                    <div>
+                                        <h5 class="font-cute text-pinkish-900 font-normal text-lg">Operating Hours</h5>
+                                        <p class="text-sm">Monday – Thursday: 10:00 AM – 10:00 PM</p>
+                                        <p class="text-sm text-pinkish-600 font-medium">Friday – Sunday: 10:00 AM – 11:30 PM</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center gap-4 pt-2">
+                                <a href="tel:+251912345678" class="bg-pinkish-500 hover:bg-pinkish-600 text-white px-6 py-3 rounded-full text-sm font-medium transition-all shadow-md flex items-center gap-2">
+                                    <i class="fa-solid fa-phone"></i> Call TipTap Cafe
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Card Visual Accent (3747.jpg) -->
+                        <div class="lg:col-span-5">
+                            <div class="pink-card p-3 rounded-3xl relative overflow-hidden">
+                                <img src="3747.jpg" 
+                                     onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&q=80&w=800';" 
+                                     alt="Platter Feast at TipTap Cafe Jijiga" 
+                                     class="w-full h-80 object-cover rounded-2xl">
+                                <div class="absolute top-6 right-6 bg-pinkish-500 text-white text-xs px-3 py-1 rounded-full font-medium shadow-md">
+                                    Jijiga, Ethiopia
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </section>
+
+        </div>
+
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="bg-white border-t border-pinkish-200 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+                
+                <div class="flex items-center gap-3">
+                    <div class="w-9 h-9 rounded-xl bg-pinkish-500 flex items-center justify-center text-white text-base">
+                        <i class="fa-solid fa-ice-cream"></i>
+                    </div>
+                    <div>
+                        <span class="font-cute text-xl font-normal text-pinkish-900">TipTap Cafe</span>
+                        <p class="text-xs text-gray-500 font-light">Jijiga, Somali Region, Ethiopia • Phone: +251 91 234 5678</p>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-6 text-sm text-pinkish-900 font-medium">
+                    <button onclick="switchPage('home')" class="hover:text-pinkish-500 transition-colors">Home</button>
+                    <button onclick="switchPage('menu')" class="hover:text-pinkish-500 transition-colors">Menu</button>
+                    <button onclick="switchPage('visit')" class="hover:text-pinkish-500 transition-colors">Visit Us</button>
+                </div>
+
+                <p class="text-xs text-gray-400 font-light">
+                    &copy; 2026 TipTap Cafe Jijiga. All rights reserved.
+                </p>
+
+            </div>
+        </div>
+    </footer>
+
+<!-- JavaScript Interactions -->
+    <script>
+        // 1. Single Page Application (SPA) 3-Page Navigation
+        function switchPage(pageId) {
+            // Hide all pages
+            const pages = document.querySelectorAll('.page-content');
+            pages.forEach(p => p.classList.add('hidden'));
+
+            // Show selected page
+            const targetPage = document.getElementById('page-' + pageId);
+            if (targetPage) {
+                targetPage.classList.remove('hidden');
+            }
+
+            // Update navbar active state
+            const tabs = document.querySelectorAll('.page-tab');
+            tabs.forEach(t => t.classList.remove('active'));
+            
+            const activeTab = document.getElementById('tab-' + pageId);
+            if (activeTab) {
+                activeTab.classList.add('active');
+            }
+
+            // Scroll to top smoothly
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // 2. Mobile Menu Drawer Toggle
+        const mobileToggle = document.getElementById('mobile-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        if (mobileToggle && mobileMenu) {
+            mobileToggle.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+        }
+
+        function closeMobileMenu() {
+            if (mobileMenu) {
+                mobileMenu.classList.add('hidden');
+            }
+        }
+
+        // 3. Menu Category Filter Function
+        function filterMenu(e, category) {
+            const filters = document.querySelectorAll('.menu-filter');
+            filters.forEach(f => f.classList.remove('active'));
+
+            // Highlight active filter button
+            if (e && e.target) {
+                e.target.classList.add('active');
+            }
+
+            const cards = document.querySelectorAll('.menu-card');
+            cards.forEach(card => {
+                if (category === 'all' || card.getAttribute('data-category') === category) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
+`
